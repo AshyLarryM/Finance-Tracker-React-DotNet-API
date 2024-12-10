@@ -1,15 +1,25 @@
+import { SyntheticEvent } from "react";
+import { CompanySearch } from "../../types/company";
 import Card from "./Card";
+import { v4 as uuidv4 } from "uuid";
 
 interface CardListProps {
-
+    searchResults: CompanySearch[],
+    onPortfolioCreate: (e: SyntheticEvent) => void,
 }
 
-export default function CardList() {
+export default function CardList({ searchResults, onPortfolioCreate }: CardListProps) {
     return (
-        <div>
-            <Card companyName="Apple" ticker="AAPL" price={225} />
-            <Card companyName="Microsoft" ticker="MSFT" price={225} />
-            <Card companyName="Tesla" ticker="TSLA" price={300} />
-        </div>
+        <>
+            {searchResults.length > 0 ? (
+                searchResults.map((result) => {
+                    return (
+                        <Card id={result.symbol} key={uuidv4()} searchResult={result} onPortfolioCreate={onPortfolioCreate} />
+                    );
+                })
+            ) : (
+                <h1>No Results</h1>
+            )}
+        </>
     )
 }
