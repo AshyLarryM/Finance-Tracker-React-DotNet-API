@@ -1,6 +1,7 @@
 import { SyntheticEvent } from "react"
 import { CompanySearch } from "../../types/company"
 import AddPortfolio from "../portfolio/addPortfolio/AddPortfolio"
+import { Link } from "react-router-dom"
 
 interface CardProps {
     id: string,
@@ -15,9 +16,9 @@ export default function Card({ id, searchResult, onPortfolioCreate }: CardProps)
             key={id}
             id={id}
         >
-            <h2 className="font-bold text-center text-slate-300 md:text-left">
+            <Link to={`/company/${searchResult.symbol}`} className="font-bold text-center text-slate-300 md:text-left">
                 {searchResult.name} ({searchResult.symbol})
-            </h2>
+            </Link>
             <p className="text-slate-300">{searchResult.currency}</p>
             <p className="font-bold text-slate-500">
                 {searchResult.exchangeShortName} - {searchResult.stockExchange}
