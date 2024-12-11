@@ -1,11 +1,13 @@
 import { SyntheticEvent, useState } from 'react';
-import CardList from './components/card/CardList';
-import Search from './components/search/Search';
 import { CompanySearch } from './types/company';
 import { searchCompanies } from './apiRepository';
+import { ListPortfolio } from './components/portfolio/listPortfolio/ListPortfolio';
+import { Search } from './components/search/Search';
+import CardList from './components/card/CardList';
+import { Navbar } from './components/layout/Navbar';
 
 function App() {
-
+	const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
 	const [search, setSearch] = useState<string>("");
 	const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
 	const [serverError, setServerError] = useState<string>("");
@@ -26,15 +28,38 @@ function App() {
 		console.log(searchResult);
 	}
 
-	function onPortfolioCreate(e: SyntheticEvent) {
+	function onPortfolioCreate(e: any) {
 		e.preventDefault();
-		console.log(e);
+		const exists = portfolioValues.find((value) => value === e.target[0].value);
+		if (exists) {
+			return;
+		}
+		const updatedPortfolio = [...portfolioValues, e.target[0].value]
+		setPortfolioValues(updatedPortfolio);
 	}
+
+	function onPortfolioDelete(e: any) {
+		e.preventDefault();
+
+		const removed = portfolioValues.filter((value) => {
+			return value !== e.target[0].value;
+		});
+		setPortfolioValues(removed);
+	}
+	console.log(portfolioValues);
 
 
 	return (
-		<div>
-			<Search onSearchSubmit={onSearchSubmit} search={search} handleSearchChange={handleSearchChange} />
+		<div className='bg-slate-900 h-screen'>
+			<Navbar />
+			<Search
+				search={search}
+				onSearchSubmit={onSearchSubmit}
+				handleSearchChange={handleSearchChange}
+			/>
+
+			<ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
+
 			{serverError && <h1 className='font-bold text-xl'>{serverError}</h1>}
 			<CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate} />
 		</div>

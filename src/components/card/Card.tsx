@@ -10,13 +10,16 @@ interface CardProps {
 
 export default function Card({ id, searchResult, onPortfolioCreate }: CardProps) {
     return (
-        <div className='w-[400px] h-[550px] flex flex-col text-center items-center p-14 overflow-hidden shadow-lg rounded-lg'>
-            <img className='rounded-full h-[180px] w-[180px] m-1' src="https://picsum.photos/200" alt="company logo" />
-            <div className="m-3">
-                <h2 className="text-xl font-semibold">{searchResult.symbol}</h2>
-                <p>${searchResult.currency}</p>
-            </div>
-            <p className="font-light">
+        <div
+            className="flex flex-col items-center justify-between w-full p-6 bg-slate-900 border-b border-b-slate-600 md:flex-row"
+            key={id}
+            id={id}
+        >
+            <h2 className="font-bold text-center text-slate-300 md:text-left">
+                {searchResult.name} ({searchResult.symbol})
+            </h2>
+            <p className="text-slate-300">{searchResult.currency}</p>
+            <p className="font-bold text-slate-500">
                 {searchResult.exchangeShortName} - {searchResult.stockExchange}
             </p>
             <AddPortfolio onPortfolioCreate={onPortfolioCreate} symbol={searchResult.symbol} />
