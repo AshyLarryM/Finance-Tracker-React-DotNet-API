@@ -9,7 +9,7 @@ interface SearchProps {
 export function Search({ onSearchSubmit, search, handleSearchChange }: SearchProps) {
     return (
         <section className="relative">
-            <div className="max-w-sm mx-auto p-6 space-y-6">
+            <div className="max-w-sm mx-auto  space-y-6">
                 <form
                     className="form relative flex flex-col w-full p-10 space-y-4 rounded-lg md:flex-row md:space-y-0 md:space-x-3"
                     onSubmit={onSearchSubmit}

@@ -10,7 +10,7 @@ interface CardListProps {
 
 export default function CardList({ searchResults, onPortfolioCreate }: CardListProps) {
     return (
-        <div className="mx-auto max-w-4xl border-2 border-slate-700 rounded-lg shadow-lg">
+        <div className="mx-auto max-w-4xl rounded-lg">
             {searchResults.length > 0 ? (
                 searchResults.map((result) => {
                     return (
@@ -18,7 +18,7 @@ export default function CardList({ searchResults, onPortfolioCreate }: CardListP
                     );
                 })
             ) : (
-                <p className="text-teal-600 mb-3 mt-3 text-2xl font-medium text-center md:text-4xl">No Results!</p>
+                <p className="text-teal-500 mb-3 mt-3 text-2xl font-semibold text-center md:text-4xl">No Results!</p>
             )}
         </div>
     )

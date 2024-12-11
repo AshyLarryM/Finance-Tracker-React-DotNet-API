@@ -58,10 +58,10 @@ function App() {
 				handleSearchChange={handleSearchChange}
 			/>
 
-			<ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
-
 			{serverError && <h1 className='font-bold text-xl'>{serverError}</h1>}
 			<CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate} />
+
+			<ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
 		</div>
 	);
 }
