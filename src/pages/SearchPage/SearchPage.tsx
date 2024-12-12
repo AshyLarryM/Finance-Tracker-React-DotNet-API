@@ -1,5 +1,4 @@
 import React, { SyntheticEvent, useState } from 'react'
-import { Navbar } from '../../components/layout/Navbar'
 import { Search } from '../../components/search/Search'
 import CardList from '../../components/card/CardList'
 import { ListPortfolio } from '../../components/portfolio/listPortfolio/ListPortfolio'

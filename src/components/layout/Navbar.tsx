@@ -15,8 +15,8 @@ export function Navbar() {
                 <div className="hidden lg:flex items-center space-x-6 text-teal-300">
                     <div className="hover:text-teal-500 duration-200 cursor-pointer font-semibold text-lg mr-6">Login</div>
                     <a
-                        href=""
-                        className="px-8 py-3 font-bold rounded text-white border border-teal-500 bg-teal-500 duration-200 hover:bg-opacity-20 hover:text-teal-500 rounded-full"
+                        href="/signup"
+                        className="px-8 py-3 font-bold text-white border border-teal-500 bg-teal-500 duration-200 hover:bg-opacity-20 hover:text-teal-500 rounded-full"
                     >
                         Signup
                     </a>
