@@ -5,6 +5,7 @@ import CompanyPage from "../pages/CompanyPage/CompanyPage";
 import SearchPage from "../pages/SearchPage/SearchPage";
 import { CompanyProfile } from "../components/companyProfile/CompanyProfile";
 import { IncomeStatement } from "../components/incomeStatement/IncomeStatement";
+import DesignPage from "../pages/DesignPage/DesignPage";
 
 export const router = createBrowserRouter([{
     path: "/",
@@ -12,6 +13,7 @@ export const router = createBrowserRouter([{
     children: [
         { path: "", element: <Homepage /> },
         { path: "search", element: <SearchPage /> },
+        { path: "design-page", element: <DesignPage /> },
         {
             path: "company/:ticker",
             element: <CompanyPage />,
