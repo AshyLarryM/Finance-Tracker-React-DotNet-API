@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { HomeIcon, Square3Stack3DIcon } from "@heroicons/react/24/solid";
+import { HomeIcon, Square3Stack3DIcon, ScaleIcon, BanknotesIcon } from "@heroicons/react/24/solid";
 
 export function Sidebar() {
     return (
@@ -9,14 +9,22 @@ export function Sidebar() {
             </button>
             <div className="flex-col min-h-full px-0 flex flex-wrap items-center justify-between w-full mx-auto overflow-y-auto overflow-x-hidden">
                 <div className="flex flex-col opacity-100 relative mt-4 overflow-y-auto overflow-x-hidden h-auto z-40 items-center flex-1 rounded w-full">
-                    <div className="md:flex-col md:min-w-full flex flex-col list-none">
+                    <div className="md:flex-col md:min-w-full flex flex-col list-none text-sm">
                         <Link to="company-profile" className="flex md:min-w-full text-slate-400 hover:text-slate-200 duration-300 uppercase font-bold pt-1 pb-4 no-underline">
                             <HomeIcon className="h-6 text-teal-500" />
                             <h6 className="ml-3">Company Profile</h6>
                         </Link>
-                        <Link to="income-statement" className="flex md:min-w-full text-slate-400 hover:text-slate-200 duration-300 uppercase font-bold pt-1 pb-4 no-underline">
+                        <Link to="income-statement" className="flex md:min-w-full mt-3 text-slate-400 hover:text-slate-200 duration-300 uppercase font-bold pt-1 pb-4 no-underline">
                             <Square3Stack3DIcon className="h-6 text-teal-500" />
                             <h6 className="ml-3">Income Statement</h6>
+                        </Link>
+                        <Link to="balance-sheet" className="flex md:min-w-full mt-3 text-slate-400 hover:text-slate-200 duration-300 uppercase font-bold pt-1 pb-4 no-underline">
+                            <ScaleIcon className="h-6 text-teal-500" />
+                            <h6 className="ml-3">Balance Sheet</h6>
+                        </Link>
+                        <Link to="cashflow-statement" className="flex md:min-w-full mt-3 text-slate-400 hover:text-slate-200 duration-300 uppercase font-bold pt-1 pb-4 no-underline">
+                            <BanknotesIcon className="h-6 text-teal-500" />
+                            <h6 className="ml-3">Cashflow Statement</h6>
                         </Link>
                     </div>
                 </div>

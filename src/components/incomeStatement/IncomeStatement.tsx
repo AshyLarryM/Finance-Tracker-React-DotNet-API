@@ -3,6 +3,7 @@ import { CompanyIncomeStatement } from "../../types/company";
 import { useEffect, useState } from "react";
 import { getIncomeStatement } from "../../apiRepository";
 import { Table } from "../table/Table";
+import { Spinner } from "../spinner/Spinner";
 
 const configs = [
     {
@@ -79,8 +80,8 @@ export function IncomeStatement() {
                     <Table config={configs} data={incomeStatement} />
                 </>
             ) : (
-                <>Loading...</>)
-            }
+                <Spinner />
+            )}
         </>
     )
 }
