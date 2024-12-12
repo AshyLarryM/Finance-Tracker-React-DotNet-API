@@ -1,5 +1,3 @@
-import { TestDataCompany } from "../table/testData"
-
 interface RatioListProps {
     config: any,
     data: any,

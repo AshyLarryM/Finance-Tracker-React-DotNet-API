@@ -1,26 +1,13 @@
-import { testIncomeStatementData } from "./testData"
 interface TableProps {
-
+    config: any,
+    data: any,
 }
-const data = testIncomeStatementData;
-type Company = (typeof data)[0];
 
-const configs = [
-    {
-        label: "Year",
-        render: (company: Company) => company.acceptedDate,
-    },
-    {
-        label: "Cost of Revenue",
-        render: (company: Company) => company.costOfRevenue,
-    },
-]
-
-export function Table({ }: TableProps) {
-    const renderedRows = data.map((company) => {
+export function Table({ config, data }: TableProps) {
+    const renderedRows = data.map((company: any) => {
         return (
             <tr key={company.cik}>
-                {configs.map((val: any) => {
+                {config.map((val: any) => {
                     return (
                         <td className="p-4 whitespace-nowrap text-slate-400 text-sm font-normal">
                             {val.render(company)}
@@ -31,7 +18,7 @@ export function Table({ }: TableProps) {
         )
     });
 
-    const renderHeaders = configs.map((config: any) => {
+    const renderHeaders = config.map((config: any) => {
         return (
             <th className="p-4 text-left text-xs font-medium text-slate-300 uppercase tracking-wider"
                 key={config.label}

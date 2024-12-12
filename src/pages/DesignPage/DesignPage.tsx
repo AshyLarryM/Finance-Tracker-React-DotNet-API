@@ -1,7 +1,5 @@
-import React from 'react'
 import { Table } from '../../components/table/Table'
 import { RatioList } from '../../components/ratioList/RatioList'
-import { CompanyKeyMetrics } from '../../types/company'
 import { testIncomeStatementData } from '../../components/table/testData'
 
 const tableConfig = [
@@ -19,7 +17,7 @@ export default function DesignPage() {
             <h2>This is _____ design page.  </h2>
             <RatioList data={testIncomeStatementData} config={tableConfig} />
             <RatioList data={testIncomeStatementData} config={tableConfig} />
-            <Table />
+            <Table data={testIncomeStatementData} config={tableConfig} />
         </div>
     )
 }
