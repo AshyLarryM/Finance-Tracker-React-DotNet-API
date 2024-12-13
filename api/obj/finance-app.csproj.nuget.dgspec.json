@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/lawrencemarkel/finance-app/finance-app.csproj": {}
+    "/Users/lawrencemarkel/finance-app/api/finance-app.csproj": {}
   },
   "projects": {
-    "/Users/lawrencemarkel/finance-app/finance-app.csproj": {
+    "/Users/lawrencemarkel/finance-app/api/finance-app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/lawrencemarkel/finance-app/finance-app.csproj",
+        "projectUniqueName": "/Users/lawrencemarkel/finance-app/api/finance-app.csproj",
         "projectName": "finance-app",
-        "projectPath": "/Users/lawrencemarkel/finance-app/finance-app.csproj",
+        "projectPath": "/Users/lawrencemarkel/finance-app/api/finance-app.csproj",
         "packagesPath": "/Users/lawrencemarkel/.nuget/packages/",
-        "outputPath": "/Users/lawrencemarkel/finance-app/obj/",
+        "outputPath": "/Users/lawrencemarkel/finance-app/api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/lawrencemarkel/.nuget/NuGet/NuGet.Config"

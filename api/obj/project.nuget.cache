@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rKgTKU6orwIUreqcAuMGGFCofHBuCBgmZQi1JeabQg+2p8OWEIQQCLJZBLsH3TiGuus/kvLUKINghBxWihf0cQ==",
+  "dgSpecHash": "5xu5UNbI468UV2dDDtGP7hYyMQaKFvMz8Ay1NkVAQXFEb0ff2+lUKRIg2q7sFP9NFWXf/a/WGd5poPilSlVpBg==",
   "success": true,
-  "projectFilePath": "/Users/lawrencemarkel/finance-app/finance-app.csproj",
+  "projectFilePath": "/Users/lawrencemarkel/finance-app/api/finance-app.csproj",
   "expectedPackageFiles": [
     "/Users/lawrencemarkel/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/Users/lawrencemarkel/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
