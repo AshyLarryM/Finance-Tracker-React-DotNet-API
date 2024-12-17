@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace finance_app.Dtos.Comment
 {
-    public class ComentDTO
+    public class CommentDTO
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;
