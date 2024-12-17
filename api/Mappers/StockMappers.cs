@@ -9,7 +9,7 @@ namespace finance_app.Mappers
 {
     public static class StockMappers
     {
-        public static StockDTO ToStockDto(this Stock stockModel)
+        public static StockDTO ToStockDTO(this Stock stockModel)
         {
             return new StockDTO
             {
