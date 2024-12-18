@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using finance_app.data;
+using finance_app.Dtos.Comment;
 using finance_app.Interfaces;
 using finance_app.models;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,11 @@ namespace finance_app.Repository
             _context = context;
         }
 
-        public Task<Comment> CreateAsync(Comment commentModel)
+        public async Task<Comment> CreateAsync(Comment commentModel)
         {
-            throw new NotImplementedException();
+            await _context.Comments.AddAsync(commentModel);
+            await _context.SaveChangesAsync();
+            return commentModel;
         }
 
         public Task<Comment?> DeleteAsync(int id)
