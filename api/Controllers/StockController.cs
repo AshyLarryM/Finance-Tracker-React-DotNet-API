@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using finance_app.data;
 using finance_app.Dtos.Stock;
+using finance_app.Helpers;
 using finance_app.Interfaces;
 using finance_app.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -24,14 +25,14 @@ namespace finance_app.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery]QueryObject query)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var stocks = await _stockRepo.GetAllAsync();
+            var stocks = await _stockRepo.GetAllAsync(query);
             var stockDTO = stocks.Select(s => s.ToStockDTO());
 
             return Ok(stocks);
@@ -94,7 +95,7 @@ namespace finance_app.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             var stockModel = await _stockRepo.DeleteAsync(id);
 
             if (stockModel == null)
