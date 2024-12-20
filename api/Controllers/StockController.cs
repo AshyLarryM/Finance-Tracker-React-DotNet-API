@@ -7,6 +7,7 @@ using finance_app.Dtos.Stock;
 using finance_app.Helpers;
 using finance_app.Interfaces;
 using finance_app.Mappers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,7 @@ namespace finance_app.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery]QueryObject query)
         {
             if (!ModelState.IsValid)

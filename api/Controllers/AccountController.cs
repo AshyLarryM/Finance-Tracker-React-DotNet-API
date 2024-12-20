@@ -7,6 +7,7 @@ using finance_app.Interfaces;
 using finance_app.models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace finance_app.Controllers
 {
@@ -16,11 +17,46 @@ namespace finance_app.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly ITokenService _tokenService;
-        public AccountController(UserManager<User> userManager, ITokenService tokenService)
+        private readonly SignInManager<User> _signinManger;
+        public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _tokenService = tokenService;
+            _signinManger = signInManager;
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginDTO.Username.ToLower());
+
+            if (user == null)
+            {
+                return Unauthorized("Invalid Username!");
+            }
+
+            var result = await _signinManger.CheckPasswordSignInAsync(user, loginDTO.Password, false);
+
+            if (!result.Succeeded)
+            {
+                return Unauthorized("Invalid Username or Password");
+            }
+
+            return Ok(
+                new NewUserDTO
+                {
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Token = _tokenService.CreateToken(user),
+                }
+            );
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
         {
@@ -53,11 +89,13 @@ namespace finance_app.Controllers
                             }
                         );
                     }
-                    else {
+                    else
+                    {
                         return StatusCode(500, roleResult.Errors);
                     }
                 }
-                else {
+                else
+                {
                     return StatusCode(500, createdUser.Errors);
                 }
             }
