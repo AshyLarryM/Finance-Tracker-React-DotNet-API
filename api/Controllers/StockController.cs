@@ -35,9 +35,9 @@ namespace finance_app.Controllers
             }
 
             var stocks = await _stockRepo.GetAllAsync(query);
-            var stockDTO = stocks.Select(s => s.ToStockDTO());
+            var stockDTO = stocks.Select(s => s.ToStockDTO()).ToList();
 
-            return Ok(stocks);
+            return Ok(stockDTO);
         }
 
         [HttpGet("{id:int}")]

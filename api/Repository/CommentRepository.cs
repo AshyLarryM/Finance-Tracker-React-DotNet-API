@@ -43,12 +43,12 @@ namespace finance_app.Repository
 
         public async Task<List<Comment>> GetAllAsync()
         {
-            return await _context.Comments.ToListAsync();
+            return await _context.Comments.Include(a => a.User).ToListAsync();
         }
 
-        public Task<Comment?> GetByIdAsync(int id)
+        public async Task<Comment?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Comments.Include(a => a.User).FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Comment?> UpdateAsync(int id, Comment commentModel)
