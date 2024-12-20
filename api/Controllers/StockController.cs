@@ -26,7 +26,7 @@ namespace finance_app.Controllers
         }
 
         [HttpGet]
-        
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery]QueryObject query)
         {
             if (!ModelState.IsValid)
