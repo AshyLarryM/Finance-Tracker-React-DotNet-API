@@ -3,21 +3,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../context/useAuth";
 import { useForm } from "react-hook-form";
 
-const loginSchema = z.object({
+const registerSchema = z.object({
+    email: z.string().min(1, "Email is required"),
     userName: z.string().min(1, "Username is required"),
     password: z.string().min(12, "Passwords must be at least 12 characters."),
 });
 
-type LoginFormInputs = z.infer<typeof loginSchema>;
+type RegisterFormInputs = z.infer<typeof registerSchema>;
 
-export default function LoginPage() {
-    const { loginUser } = useAuth();
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginFormInputs>({ resolver: zodResolver(loginSchema) });
-
-    function handleLogin(form: LoginFormInputs) {
-        loginUser(form.userName, form.password);
-    }
-
+export default function RegisterPage() {
+    const { registerUser } = useAuth();
+        const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>({ resolver: zodResolver(registerSchema) });
+    
+        function handleLogin(form: RegisterFormInputs) {
+            registerUser(form.userName, form.email, form.password);
+        }
 
     return (
         <section>
@@ -25,12 +25,28 @@ export default function LoginPage() {
                 <div className="w-full bg-slate-800 rounded-lg shadow border border-slate-600 md:mb-20 sm:max-w-md xl:p-0">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-center text-teal-400 md:text-2xl">
-                            Sign in to your account
+                            Create Account
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(handleLogin)}>
+                        <div>
+                                <label
+                                    htmlFor="email"
+                                    className="block mb-2 text-sm font-medium text-slate-300"
+                                >
+                                    Email Address
+                                </label>
+                                <input
+                                    type="text"
+                                    id="email"
+                                    className="bg-slate-600 border border-slate-500 text-slate-300 sm:text-sm rounded-lg block w-full p-2.5"
+                                    placeholder="Email Address"
+                                    {...register("email")}
+                                />
+                                {errors.userName ? <p className="text-slate-300">{errors.userName.message}</p> : ""}
+                            </div>
                             <div>
                                 <label
-                                    htmlFor="userName"
+                                    htmlFor="email"
                                     className="block mb-2 text-sm font-medium text-slate-300"
                                 >
                                     Username

@@ -17,7 +17,7 @@ export function handleError(error: any) {
         else if (err?.data) {
             toast.warning(err.data);
         }
-        else if (err?.status == 401) {
+        else if (err?.status === 401) {
             toast.warning("Please Login");
             window.history.pushState({}, "LoginPage", "/login");
         }
