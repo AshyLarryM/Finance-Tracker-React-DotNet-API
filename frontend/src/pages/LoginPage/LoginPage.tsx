@@ -2,6 +2,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../context/useAuth";
 import { useForm } from "react-hook-form";
+import { error } from "console";
 
 const loginSchema = z.object({
     userName: z.string().min(1, "Username is required"),
@@ -27,7 +28,7 @@ export default function LoginPage() {
                         <h1 className="text-xl font-bold leading-tight tracking-tight text-center text-teal-400 md:text-2xl">
                             Sign in to your account
                         </h1>
-                        <form className="space-y-4 md:space-y-6" action="#">
+                        <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(handleLogin)}>
                             <div>
                                 <label
                                     htmlFor="email"
@@ -37,11 +38,12 @@ export default function LoginPage() {
                                 </label>
                                 <input
                                     type="text"
-                                    name="username"
                                     id="username"
                                     className="bg-slate-600 border border-slate-500 text-slate-300 sm:text-sm rounded-lgblock w-full p-2.5"
                                     placeholder="Username"
+                                    {...register("userName")}
                                 />
+                                {errors.userName ? <p className="text-slate-300">{errors.userName.message}</p> : ""}
                             </div>
                             <div>
                                 <label
@@ -52,32 +54,15 @@ export default function LoginPage() {
                                 </label>
                                 <input
                                     type="password"
-                                    name="password"
                                     id="password"
                                     placeholder="••••••••"
                                     className="bg-slate-600 border border-slate-500 text-slate-300 sm:text-sm rounded-lg block w-full p-2.5"
+                                    {...register("password")}
                                 />
+                                {errors.password ? <p className="text-slate-300">{errors.password.message}</p> : ""}
+
                             </div>
                             <div className="flex items-center justify-between">
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                        <input
-                                            id="remember"
-                                            aria-describedby="remember"
-                                            type="checkbox"
-                                            className="w-4 h-4 border rounded bg-gray-50"
-                                            required
-                                        />
-                                    </div>
-                                    <div className="ml-3 text-sm">
-                                        <label
-                                            htmlFor="remember"
-                                            className="text-slate-400"
-                                        >
-                                            Remember me
-                                        </label>
-                                    </div>
-                                </div>
                                 <a
                                     href="#"
                                     className="text-sm font-medium text-teal-500 hover:underline"
