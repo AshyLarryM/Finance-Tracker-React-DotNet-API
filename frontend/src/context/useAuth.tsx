@@ -90,5 +90,5 @@ export function UserProvider({ children }: AuthContextProps) {
 }
 
 export function useAuth() {
-    React.useContext(UserContext)
+    return React.useContext(UserContext)
 }
