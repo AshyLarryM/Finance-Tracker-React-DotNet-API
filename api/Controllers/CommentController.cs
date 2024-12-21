@@ -7,6 +7,7 @@ using finance_app.Exstensions;
 using finance_app.Interfaces;
 using finance_app.Mappers;
 using finance_app.models;
+using finance_app.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,11 +22,13 @@ namespace finance_app.Controllers
         private readonly ICommentRepository _commentRepo;
         private readonly IStockRepository _stockRepo;
         private readonly UserManager<User> _userManager;
-        public CommentController(ICommentRepository commentRepo, IStockRepository stockRepo, UserManager<User> userManager)
+        private readonly IFMPService _fmpService;
+        public CommentController(ICommentRepository commentRepo, IStockRepository stockRepo, UserManager<User> userManager, IFMPService fmpService)
         {
             _commentRepo = commentRepo;
             _stockRepo = stockRepo;
             _userManager = userManager;
+            _fmpService = fmpService;
         }
 
         [HttpGet]
@@ -35,7 +38,7 @@ namespace finance_app.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             var comments = await _commentRepo.GetAllAsync();
             var commentDTO = comments.Select(c => c.ToCommentDTO());
 
@@ -60,23 +63,32 @@ namespace finance_app.Controllers
             return Ok(comment.ToCommentDTO());
         }
 
-        [HttpPost("{stockId:int}")]
-        public async Task<IActionResult> Create([FromRoute] int stockId, CreateCommentDTO commentDTO)
+        [HttpPost("{symbol:alpha}")]
+        public async Task<IActionResult> Create([FromRoute] string symbol, CreateCommentDTO commentDTO)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (!await _stockRepo.StockExists(stockId))
+            var stock = await _stockRepo.GetBySymbolAsync(symbol);
+
+            if (stock == null)
             {
-                return BadRequest("Stock does not exist!");
+                stock = await _fmpService.FindStockBySymbolAsync(symbol);
+                if (stock == null)
+                {
+                    return BadRequest("This stock does not exist");
+                }
+                else {
+                    await _stockRepo.CreateAsync(stock);
+                }
             }
 
             var username = User.GetUsername();
             var user = await _userManager.FindByNameAsync(username);
 
-            var commentModel = commentDTO.ToCommentFromCreate(stockId);
+            var commentModel = commentDTO.ToCommentFromCreate(stock.Id);
             commentModel.UserId = user.Id;
             await _commentRepo.CreateAsync(commentModel);
 
@@ -110,7 +122,7 @@ namespace finance_app.Controllers
             {
                 return BadRequest(ModelState);
             }
-            
+
             var commentModel = await _commentRepo.DeleteAsync(id);
 
             if (commentModel == null)
