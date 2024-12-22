@@ -12,7 +12,7 @@ export function StockCommentForm({ stockSymbol, handleComment }: StockCommentFor
     const { register, handleSubmit, formState: { errors } } = useForm<CommentFormInputs>({ resolver: zodResolver(commentSchema) });
 
     return (
-        <form className="mt-4 ml-4" onSubmit={handleSubmit(handleComment)}>
+        <form className="my-4 ml-4" onSubmit={handleSubmit(handleComment)}>
             <input
                 type="text"
                 id="title"
@@ -35,9 +35,9 @@ export function StockCommentForm({ stockSymbol, handleComment }: StockCommentFor
             </div>
             <button
                 type="submit"
-                className="inline-flex items-center py-2.5 px-4 text-md font-medium text-center text-white bg-teal-500 border border-teal-500 hover:text-teal-500 rounded-lg focus:ring-4 focus:ring-teal-200  hover:bg-opacity-20"
+                className="justify-center items-center inline-flex w-full py-2.5 px-4 text-md font-medium text-center text-white bg-teal-500 border border-teal-500 hover:text-teal-500 rounded-lg focus:ring-4 focus:ring-teal-200  hover:bg-opacity-20"
             >
-                Post comment
+                Post Comment
             </button>
         </form>
     )

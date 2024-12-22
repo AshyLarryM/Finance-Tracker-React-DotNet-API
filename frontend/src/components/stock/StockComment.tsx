@@ -55,8 +55,9 @@ export function StockComment({ stockSymbol }: StockCommentProps) {
 
     return (
         <div className="flex flex-col">
-            {loading ? <Spinner /> : <StockCommentList comments={comments!} />}
             <StockCommentForm stockSymbol={stockSymbol} handleComment={handleComment} />
+            {loading ? <Spinner /> : <StockCommentList comments={comments!} />}
+            
         </div>
     )
 }
