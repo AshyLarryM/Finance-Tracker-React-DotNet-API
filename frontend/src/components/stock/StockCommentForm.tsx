@@ -16,19 +16,19 @@ export function StockCommentForm({ stockSymbol, handleComment }: StockCommentFor
             <input
                 type="text"
                 id="title"
-                className="mb-3 bg-white border border-slate-600 text-slate-900 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5"
+                className="mb-3 bg-slate-600 border border-slate-600 text-slate-300 sm:text-sm rounded-lg focus:ring-teal-600 focus:border-teal-600 block w-full p-2.5"
                 placeholder="Title"
                 {...register("title")}
             />
             {errors.title ? <p>{errors.title.message}</p>: ""}
-            <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-slate-200">
+            <div className="py-2 px-4 mb-4 bg-slate-600 rounded-lg rounded-t-lg border border-slate-600">
                 <label htmlFor="comment" className="sr-only">
                     Your comment
                 </label>
                 <textarea
                     id="comment"
                     rows={6}
-                    className="px-0 w-full text-sm text-slate-900 border-0 focus:ring-0 focus:outline-none"
+                    className="px-0 w-full bg-slate-600 text-sm text-slate-300 border-0 focus:ring-0 focus:outline-none"
                     placeholder="Write a comment..."
                     {...register("content")}
                 ></textarea>
