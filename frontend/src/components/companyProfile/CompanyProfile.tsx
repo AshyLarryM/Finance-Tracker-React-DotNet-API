@@ -5,6 +5,7 @@ import { RatioList } from "../ratioList/RatioList";
 import { getKeyMetrics } from "../../apiRepository";
 import { Spinner } from "../spinner/Spinner";
 import { formatLargeNonMonetaryNumber, formatRatio } from "../../utils/NumberFormatting";
+import { StockComment } from "../stock/StockComment";
 
 const tableConfig = [
     {
@@ -96,6 +97,7 @@ export function CompanyProfile() {
             {companyData ? (
                 <>
                     <RatioList config={tableConfig} data={companyData} />
+                    <StockComment stockSymbol={ticker} />
                 </>
             ) : (
                 <Spinner />

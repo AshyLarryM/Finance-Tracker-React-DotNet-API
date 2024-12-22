@@ -1,23 +1,16 @@
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../context/useAuth";
 import { useForm } from "react-hook-form";
-
-const registerSchema = z.object({
-    email: z.string().min(1, "Email is required"),
-    userName: z.string().min(1, "Username is required"),
-    password: z.string().min(12, "Passwords must be at least 12 characters."),
-});
-
-type RegisterFormInputs = z.infer<typeof registerSchema>;
+import { RegisterFormInputs, registerSchema } from "../../utils/schemas/authSchemas";
+import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
     const { registerUser } = useAuth();
-        const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>({ resolver: zodResolver(registerSchema) });
-    
-        function handleLogin(form: RegisterFormInputs) {
-            registerUser(form.userName, form.email, form.password);
-        }
+    const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>({ resolver: zodResolver(registerSchema) });
+
+    function handleLogin(form: RegisterFormInputs) {
+        registerUser(form.userName, form.email, form.password);
+    }
 
     return (
         <section>
@@ -28,7 +21,7 @@ export default function RegisterPage() {
                             Create Account
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit(handleLogin)}>
-                        <div>
+                            <div>
                                 <label
                                     htmlFor="email"
                                     className="block mb-2 text-sm font-medium text-slate-300"
@@ -77,14 +70,7 @@ export default function RegisterPage() {
                                 {errors.password ? <p className="text-slate-300">{errors.password.message}</p> : ""}
 
                             </div>
-                            <div className="flex items-center justify-between">
-                                <a
-                                    href="#"
-                                    className="text-sm font-medium text-teal-500 hover:underline"
-                                >
-                                    Forgot password?
-                                </a>
-                            </div>
+
                             <button
                                 type="submit"
                                 className="w-full text-white bg-teal-500 hover:bg-opacity-20 border border-teal-500 hover:text-teal-400  hover transition duration-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -92,13 +78,13 @@ export default function RegisterPage() {
                                 Sign in
                             </button>
                             <p className="text-sm text-center font-light text-slate-400">
-                                Don’t have an account yet?{" "}
-                                <a
-                                    href="#"
+                                Already have an account?{" "}
+                                <Link
+                                    to="/login"
                                     className="font-medium text-teal-400 hover:underline"
                                 >
-                                    Sign up
-                                </a>
+                                    Sign in
+                                </Link>
                             </p>
                         </form>
                     </div>

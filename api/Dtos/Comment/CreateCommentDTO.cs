@@ -14,7 +14,7 @@ namespace finance_app.Dtos.Comment
         [MaxLength(280, ErrorMessage = "Title must be 280 characters maximum.")]
         public string Title { get; set; } = string.Empty;
         [Required]
-        [MinLength(5, ErrorMessage = "Content must be at least characters.")]
+        [MinLength(5, ErrorMessage = "Content must be at least 5 characters.")]
         [MaxLength(280, ErrorMessage = "Content must be 280 characters maximum.")]
         public string Content { get; set; } = string.Empty;
     }

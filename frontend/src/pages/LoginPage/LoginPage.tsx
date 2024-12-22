@@ -1,14 +1,8 @@
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "../../context/useAuth";
 import { useForm } from "react-hook-form";
-
-const loginSchema = z.object({
-    userName: z.string().min(1, "Username is required"),
-    password: z.string().min(12, "Passwords must be at least 12 characters."),
-});
-
-type LoginFormInputs = z.infer<typeof loginSchema>;
+import { LoginFormInputs, loginSchema } from "../../utils/schemas/authSchemas";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
     const { loginUser } = useAuth();
@@ -17,7 +11,6 @@ export default function LoginPage() {
     function handleLogin(form: LoginFormInputs) {
         loginUser(form.userName, form.password);
     }
-
 
     return (
         <section>
@@ -61,14 +54,6 @@ export default function LoginPage() {
                                 {errors.password ? <p className="text-slate-300">{errors.password.message}</p> : ""}
 
                             </div>
-                            <div className="flex items-center justify-between">
-                                <a
-                                    href="#"
-                                    className="text-sm font-medium text-teal-500 hover:underline"
-                                >
-                                    Forgot password?
-                                </a>
-                            </div>
                             <button
                                 type="submit"
                                 className="w-full text-white bg-teal-500 hover:bg-opacity-20 border border-teal-500 hover:text-teal-400  hover transition duration-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -77,12 +62,12 @@ export default function LoginPage() {
                             </button>
                             <p className="text-sm text-center font-light text-slate-400">
                                 Don’t have an account yet?{" "}
-                                <a
-                                    href="#"
+                                <Link
+                                    to="/register"
                                     className="font-medium text-teal-400 hover:underline"
                                 >
                                     Sign up
-                                </a>
+                                </Link>
                             </p>
                         </form>
                     </div>

@@ -8,6 +8,7 @@ using finance_app.Interfaces;
 using finance_app.Mappers;
 using finance_app.models;
 using finance_app.Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,7 +64,8 @@ namespace finance_app.Controllers
             return Ok(comment.ToCommentDTO());
         }
 
-        [HttpPost("{symbol:alpha}")]
+        [HttpPost]
+        [Route("{symbol:alpha}")]
         public async Task<IActionResult> Create([FromRoute] string symbol, CreateCommentDTO commentDTO)
         {
             if (!ModelState.IsValid)
@@ -80,10 +82,17 @@ namespace finance_app.Controllers
                 {
                     return BadRequest("This stock does not exist");
                 }
-                else {
+                else
+                {
                     await _stockRepo.CreateAsync(stock);
                 }
             }
+
+            if (User == null || !User.Identity.IsAuthenticated)
+            {
+                return Unauthorized("User is not authenticated.");
+            }
+
 
             var username = User.GetUsername();
             var user = await _userManager.FindByNameAsync(username);
