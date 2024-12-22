@@ -83,7 +83,7 @@ export function UserProvider({ children }: AuthContextProps) {
     }
 
     return (
-        <UserContext.Provider value={{ loginUser, registerUser, user, token, logout, isLoggedIn}}>
+        <UserContext.Provider value={{ loginUser, registerUser, user, token, logout, isLoggedIn }}>
             {isReady ? children : null}
         </UserContext.Provider>
     )
