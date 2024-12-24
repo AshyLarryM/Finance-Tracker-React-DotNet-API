@@ -1,12 +1,17 @@
-import React, { SyntheticEvent, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import { Search } from '../../components/search/Search'
 import CardList from '../../components/card/CardList'
 import { ListPortfolio } from '../../components/portfolio/listPortfolio/ListPortfolio'
 import { searchCompanies } from '../../apiRepository'
 import { CompanySearch } from '../../types/company'
+import { PortfolioGet } from '../../models/Portfolio'
+import { portfolioAddApi, portfolioDeleteApi, portfolioGetApi } from '../../services/PortfolioService'
+import { useAuth } from '../../context/useAuth'
+import { toast } from 'react-toastify'
 
 export default function SearchPage() {
-    const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
+	const { token } = useAuth();
+	const [portfolioValues, setPortfolioValues] = useState<PortfolioGet[] | null>([]);
 	const [search, setSearch] = useState<string>("");
 	const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
 	const [serverError, setServerError] = useState<string>("");
@@ -15,6 +20,24 @@ export default function SearchPage() {
 		setSearch(e.target.value);
 		console.log(e)
 	}
+
+	function getPortfolio() {
+		if (!token) {
+			toast.warning("You must be logged in to view portfolio!");
+			return
+		}
+		portfolioGetApi(token).then((response) => {
+			if (response?.data) {
+				setPortfolioValues(response?.data)
+			}
+		}).catch((e) => {
+			toast.warning("Could not get portfolio values");
+		})
+	};
+
+	useEffect(() => {
+		getPortfolio();
+	}, []);
 
 	async function onSearchSubmit(e: SyntheticEvent) {
 		e.preventDefault();
@@ -28,26 +51,39 @@ export default function SearchPage() {
 	}
 
 	function onPortfolioCreate(e: any) {
-		e.preventDefault();
-		const exists = portfolioValues.find((value) => value === e.target[0].value);
-		if (exists) {
+		console.log("Created Portfolio Token: ", token);
+		if (!token) {
+			toast.warning("You need to be logged into add to portfolio");
 			return;
 		}
-		const updatedPortfolio = [...portfolioValues, e.target[0].value]
-		setPortfolioValues(updatedPortfolio);
+		e.preventDefault();
+
+		portfolioAddApi(e.target[0].value, token).then((response) => {
+			if (response?.status === 204) {
+				toast.success("Stock added to portfolio!");
+				getPortfolio();
+			}
+		}).catch((e) => {
+			toast.warning("Could not create portfolio!");
+		})
 	}
 
 	function onPortfolioDelete(e: any) {
 		e.preventDefault();
-
-		const removed = portfolioValues.filter((value) => {
-			return value !== e.target[0].value;
+		if (!token) {
+			toast.warning("You need to be logged into delete from portfolio");
+			return;
+		}
+		portfolioDeleteApi(e.target[0].value, token).then((response) => {
+			if (response?.status === 200) {
+				toast.success("Stock deleted from portolio");
+				getPortfolio();
+			}
 		});
-		setPortfolioValues(removed);
-	}
-	console.log(portfolioValues);
-    return (
-        <div className='bg-slate-900 h-screen'>
+	};
+
+	return (
+		<div className='bg-slate-900 h-screen'>
 			<Search
 				search={search}
 				onSearchSubmit={onSearchSubmit}
@@ -57,7 +93,7 @@ export default function SearchPage() {
 			{serverError && <h1 className='font-bold text-xl'>{serverError}</h1>}
 			<CardList searchResults={searchResult} onPortfolioCreate={onPortfolioCreate} />
 
-			<ListPortfolio portfolioValues={portfolioValues} onPortfolioDelete={onPortfolioDelete} />
+			<ListPortfolio portfolioValues={portfolioValues!} onPortfolioDelete={onPortfolioDelete} />
 		</div>
-    )
+	)
 }
