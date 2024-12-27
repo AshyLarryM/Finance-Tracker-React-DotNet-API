@@ -10,6 +10,8 @@ services:
       - api
     networks:
       - app-network
+    env_file:
+      - ../.env
 
   api:
     build:
@@ -17,11 +19,12 @@ services:
     ports:
       - "7087:7087"
     environment:
-      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=FinanceApp;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True;
+      - CONNECTION_STRING=${CONNECTION_STRING}
       - JWT__Issuer=http://localhost:7087
       - JWT__Audience=http://localhost:7087
       - JWT__SigningKey=${JWT_SIGNING_KEY}
-      - FMPKey=${FMP_KEY}
+      - FMPKey=${FMPKey}
+      - REACT_APP_API_KEY=${REACT_APP_API_KEY}
 
     depends_on:
       - sqlserver
