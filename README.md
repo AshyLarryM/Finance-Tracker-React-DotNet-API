@@ -16,7 +16,7 @@ Before you start, ensure you have the following installed:
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone <repository-url>
+   git clone <(https://github.com/AshyLarryM/Finance-Tracker-React-DotNet-API.git)>
    ```
 
 ---
