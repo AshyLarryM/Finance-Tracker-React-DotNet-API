@@ -2,7 +2,6 @@
 
 ## Overview
 This project consists of a frontend, an API backend, and a SQL Server database, all containerized using Docker. The setup ensures the application can be easily run and tested locally with minimal configuration.
-
 ---
 
 ## Prerequisites
@@ -10,7 +9,6 @@ This project consists of a frontend, an API backend, and a SQL Server database, 
 Before you start, ensure you have the following installed:
 
 - [Docker](https://www.docker.com/products/docker-desktop) (Docker Desktop for Windows/Mac or Docker Engine for Linux)
-- [Git](https://git-scm.com/)
 
 ---
 
@@ -65,7 +63,7 @@ Before you start, ensure you have the following installed:
 ### 1. Frontend
 - **Location**: `./frontend`
 - **Port**: `3000`
-- **Description**: React-based frontend for the application.
+- **Description**: React/TypeScript based frontend for the application.  Allows users to login, search through the stock market for their favorite companies, view financial data, and add specific stocks to portfolio, as well as commenting.
 
 ### 2. API
 - **Location**: `./api`
@@ -110,12 +108,3 @@ To view logs for a specific service:
 docker-compose logs <service-name>
 ```
 - Replace `<service-name>` with `frontend`, `api`, or `sqlserver`.
-
----
-
-## Additional Notes
-
-- Ensure the `.env` file is not committed to version control to protect sensitive information.
-- Update `appsettings.json` or other configuration files as needed for production environments.
-- Contributions and pull requests are welcome!
-
