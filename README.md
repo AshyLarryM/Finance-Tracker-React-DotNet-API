@@ -17,7 +17,6 @@ Before you start, ensure you have the following installed:
 1. Clone the repository to your local machine:
    ```bash
    git clone <repository-url>
-   cd <repository-folder>
    ```
 
 ---
@@ -25,9 +24,6 @@ Before you start, ensure you have the following installed:
 ## Environment Configuration
 
 1. Create a `.env` file in the root of the repository. Use the provided `.env.example` as a template:
-   ```bash
-   cp .env.example .env
-   ```
 
 2. Update the `.env` file with your specific values:
    ```env
