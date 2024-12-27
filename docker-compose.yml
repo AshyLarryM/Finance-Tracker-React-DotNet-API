@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+  api:
+    build:
+      context: ./api
+    ports:
+      - "7087:7087"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=FinanceApp;User Id=sa;Password=${SA_PASSWORD};TrustServerCertificate=True;
+      - JWT__Issuer=http://localhost:7087
+      - JWT__Audience=http://localhost:7087
+      - JWT__SigningKey=${JWT_SIGNING_KEY}
+      - FMPKey=${FMP_KEY}
+
+    depends_on:
+      - sqlserver
+    networks:
+      - app-network
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: "Y"
+    env_file:
+      - .env
+    ports:
+      - "1433:1433"
+    networks:
+      - app-network
+    volumes:
+      - ./api/data/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  app-network:
+    driver: bridge

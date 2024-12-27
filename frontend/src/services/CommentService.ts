@@ -2,7 +2,7 @@ import axios from "axios"
 import { CommentGet, CommentPost } from "../models/Comment"
 import { handleError } from "../utils/ErrorHandler"
 
-const api = "https://localhost:7087/api/comment/"
+const api = "http://localhost:7087/api/comment/"
 
 export async function commentPostApi(title: string, content: string, stockSymbol: string, token: string) {
   try {

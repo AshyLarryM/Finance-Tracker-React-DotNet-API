@@ -2,7 +2,7 @@ import axios from "axios";
 import { PortfolioGet, PortfolioPost } from "../models/Portfolio";
 import { handleError } from "../utils/ErrorHandler";
 
-const api = "https://localhost:7087/api/portfolio/";
+const api = "http://localhost:7087/api/portfolio/";
 
 export async function portfolioAddApi(symbol: string, token: string) {
     try {
