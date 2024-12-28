@@ -40,18 +40,9 @@ Before you start, ensure you have the following installed:
 3. Setting Up appsettings.json
 - The appsettings.json file is essential for configuring the API backend. It contains sensitive information like connection strings and API keys, which are not included in the repository for security reasons. Follow these steps to create the file:
 
-Steps:
-Navigate to the API directory:
+- Steps:
+- **Navigate to the API directory:**
 
-bash
-Copy code
-cd api
-Create a new appsettings.json file:
-
-Use your preferred text editor to create a new file named appsettings.json in the api directory.
-Copy and update the following content into the file:
-
-json
 ```
 {
   "ConnectionStrings": {
