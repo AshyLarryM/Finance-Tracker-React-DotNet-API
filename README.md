@@ -26,10 +26,13 @@ Before you start, ensure you have the following installed:
 1. Create a `.env` file in the root of the repository. Use the provided `.env.example` as a template:
 
 2. Update the `.env` file with your specific values:
+   Head to 
+   **Note: JWT_SIGNING_KEY must be at least 32 characters.**
+   **Head to https://site.financialmodelingprep.com/ for a free API Key**
    ```env
    SA_PASSWORD=YourStrongPassword
    JWT_SIGNING_KEY=YourSuperSecretKey
-   FMP_KEY=YourFMPKey
+   FMPKey=YourFMPKey
    ```
 
 ---
