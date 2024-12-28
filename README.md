@@ -1,4 +1,4 @@
-# Project README: Running the Project with Docker
+# Finance-Tracker-React-DotNet-API: Running the Project with Docker
 
 ## Overview
 This project consists of a frontend, an API backend, and a SQL Server database, all containerized using Docker. The setup ensures the application can be easily run and tested locally with minimal configuration.
