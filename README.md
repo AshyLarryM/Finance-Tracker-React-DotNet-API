@@ -27,8 +27,8 @@ Before you start, ensure you have the following installed:
 
 2. Update the `.env` file with your specific values:
    Head to 
-   **Note: JWT_SIGNING_KEY must be at least 32 characters.**
-   **Head to https://site.financialmodelingprep.com/ for a free API Key**
+   - **Note: JWT_SIGNING_KEY must be at least 32 characters.**
+   - **Head to https://site.financialmodelingprep.com/ for a free API Key**
    ```env
    SA_PASSWORD=YourStrongPassword
    JWT_SIGNING_KEY=YourSuperSecretKey
@@ -99,11 +99,3 @@ docker-compose down
 
 3. **Environment Variable Errors**:
    - Ensure all required variables are defined in your `.env` file.
-
-### Viewing Logs
-
-To view logs for a specific service:
-```bash
-docker-compose logs <service-name>
-```
-- Replace `<service-name>` with `frontend`, `api`, or `sqlserver`.
