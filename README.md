@@ -64,6 +64,11 @@ Before you start, ensure you have the following installed:
 - **Port**: `3000`
 - **Description**: React/TypeScript based frontend for the application.  Allows users to login, search through the stock market for their favorite companies, view financial data, and add specific stocks to portfolio, as well as commenting.
 
+<img width="1725" alt="Screenshot 2024-12-27 at 9 08 21 PM" src="https://github.com/user-attachments/assets/b78d709b-7c7b-47c9-81a8-d2be60783959" />
+<img width="1717" alt="Screenshot 2024-12-27 at 9 10 34 PM" src="https://github.com/user-attachments/assets/6dbe68e2-eb42-4aac-89aa-0b17aabf6bcb" />
+
+
+
 ### 2. API
 - **Location**: `./api`
 - **Port**: `7087`
