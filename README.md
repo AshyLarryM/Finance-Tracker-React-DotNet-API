@@ -1,4 +1,4 @@
-# Project README: Running the Project with Docker
+# Finance-Tracker-React-DotNet-API: Running the Project with Docker
 
 ## Overview
 This project consists of a frontend, an API backend, and a SQL Server database, all containerized using Docker. The setup ensures the application can be easily run and tested locally with minimal configuration.
@@ -16,7 +16,7 @@ Before you start, ensure you have the following installed:
 
 1. Clone the repository to your local machine:
    ```bash
-   git clone <(https://github.com/AshyLarryM/Finance-Tracker-React-DotNet-API.git)>
+   git clone https://github.com/AshyLarryM/Finance-Tracker-React-DotNet-API.git
    ```
 
 ---
@@ -26,10 +26,13 @@ Before you start, ensure you have the following installed:
 1. Create a `.env` file in the root of the repository. Use the provided `.env.example` as a template:
 
 2. Update the `.env` file with your specific values:
+   Head to 
+   - **Note: JWT_SIGNING_KEY must be at least 32 characters.**
+   - **Head to https://site.financialmodelingprep.com/ for a free API Key**
    ```env
    SA_PASSWORD=YourStrongPassword
    JWT_SIGNING_KEY=YourSuperSecretKey
-   FMP_KEY=YourFMPKey
+   FMPKey=YourFMPKey
    ```
 
 ---
@@ -60,6 +63,11 @@ Before you start, ensure you have the following installed:
 - **Location**: `./frontend`
 - **Port**: `3000`
 - **Description**: React/TypeScript based frontend for the application.  Allows users to login, search through the stock market for their favorite companies, view financial data, and add specific stocks to portfolio, as well as commenting.
+
+<img width="1725" alt="Screenshot 2024-12-27 at 9 08 21 PM" src="https://github.com/user-attachments/assets/b78d709b-7c7b-47c9-81a8-d2be60783959" />
+<img width="1717" alt="Screenshot 2024-12-27 at 9 10 34 PM" src="https://github.com/user-attachments/assets/6dbe68e2-eb42-4aac-89aa-0b17aabf6bcb" />
+
+
 
 ### 2. API
 - **Location**: `./api`
@@ -96,11 +104,3 @@ docker-compose down
 
 3. **Environment Variable Errors**:
    - Ensure all required variables are defined in your `.env` file.
-
-### Viewing Logs
-
-To view logs for a specific service:
-```bash
-docker-compose logs <service-name>
-```
-- Replace `<service-name>` with `frontend`, `api`, or `sqlserver`.
