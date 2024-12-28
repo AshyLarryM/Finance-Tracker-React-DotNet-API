@@ -23,17 +23,61 @@ Before you start, ensure you have the following installed:
 
 ## Environment Configuration
 
-1. Create a `.env` file in the root of the repository. Use the provided `.env.example` as a template:
+1. Create a `.env` file in the root of the repository.
 
 2. Update the `.env` file with your specific values:
    Head to 
    - **Note: JWT_SIGNING_KEY must be at least 32 characters.**
    - **Head to https://site.financialmodelingprep.com/ for a free API Key**
+   - **REACT_APP_API_KEY is the same as FMPKey**
    ```env
    SA_PASSWORD=YourStrongPassword
    JWT_SIGNING_KEY=YourSuperSecretKey
    FMPKey=YourFMPKey
+   REACT_APP_API_KEY=YourFMPKey
    ```
+
+3. Setting Up appsettings.json
+- The appsettings.json file is essential for configuring the API backend. It contains sensitive information like connection strings and API keys, which are not included in the repository for security reasons. Follow these steps to create the file:
+
+Steps:
+Navigate to the API directory:
+
+bash
+Copy code
+cd api
+Create a new appsettings.json file:
+
+Use your preferred text editor to create a new file named appsettings.json in the api directory.
+Copy and update the following content into the file:
+
+json
+```
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost,1433;Database=FinanceApp;User Id=sa;Password=YourStrongPassword;TrustServerCertificate=True;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "FMPKey": "YourFMPKey",
+  "JWT": {
+    "Issuer": "http://localhost:7087",
+    "Audience": "http://localhost:7087",
+    "SigningKey": "YourSuperSecretSigningKey"
+  }
+}
+```
+Replace the placeholder values:
+
+YourStrongPassword: Match the SA_PASSWORD defined in your .env file.
+YourFMPKey: Use the API key you obtained from Financial Modeling Prep.
+YourSuperSecretSigningKey: Use a secure, unique key (at least 32 characters). Match this with the JWT_SIGNING_KEY in your .env file.
+
 
 ---
 
